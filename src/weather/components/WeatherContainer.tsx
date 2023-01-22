@@ -2,8 +2,6 @@ import { useState } from "react"
 import { getWeather, getIcon } from "../resources";
 import WeatherForm from "./WeatherForm";
 import WeatherInfo from "./WeatherInfo";
-import Error from "./Error"
-
 
 interface WeatherState {
   temperature?: number | any;
@@ -78,12 +76,6 @@ const WeatherContainer = () => {
           icon={icon}
           name={name}
         />}
-      { !isVisible && isError && 
-        <Error 
-          code={code}
-          message={message}
-        />
-      }
     </>
   )
 }
