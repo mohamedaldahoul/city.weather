@@ -1,1 +1,1 @@
-export { default } from './SetUp'
+export { default } from './WeatherInfo'
