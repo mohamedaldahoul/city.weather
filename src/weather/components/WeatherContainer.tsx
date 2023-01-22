@@ -64,7 +64,9 @@ const WeatherContainer = () => {
   
   return (
     <>
-      <WeatherForm 
+      <WeatherForm
+        isError={!isVisible && isError}
+        error={error} 
         getWeatherInfo={getWeatherInfo}
         city={city}
         handleChange={handleChange}

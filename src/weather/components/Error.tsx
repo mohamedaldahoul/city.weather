@@ -1,10 +1,12 @@
+import  Typography  from "@mui/material/Typography";
+
 type Props = {
 code: string;
 message: string;
 }
 
 const Error = ({code, message }: Props) => {
-return <p>Error {code}: {message}</p>
+return <Typography>Error {code}: {message}</Typography>
 }
 
 export default Error;

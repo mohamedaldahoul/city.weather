@@ -1,4 +1,4 @@
-
+import Typography from '@mui/material/Typography'
 type Props = {
   temperature: number;
   humidity: number;
@@ -10,9 +10,9 @@ type Props = {
 const WeatherInfo = ({temperature, humidity, icon, name}: Props) => {
   return( 
     <div> 
-      <p>Weather Status in {name}</p>
-      <p>{`Temperature: ${temperature}`}</p>
-      <p>{`Humidity: ${humidity}`}</p>
+      <Typography>Weather Status in {name}</Typography>
+      <Typography>{`Temperature: ${temperature}`}</Typography>
+      <Typography>{`Humidity: ${humidity}`}</Typography>
       <img 
         src={icon}
         alt="icon" />
