@@ -3,14 +3,14 @@ type Props = {
   temperature: number;
   humidity: number;
   icon: string; 
+  name: string
 }
 
 
-const WeatherInfo = ({temperature, humidity,icon}: Props) => {
+const WeatherInfo = ({temperature, humidity, icon, name}: Props) => {
   return( 
     <div> 
-      <p>Weather Info:</p>
-    
+      <p>Weather Status in {name}</p>
       <p>{`Temperature: ${temperature}`}</p>
       <p>{`Humidity: ${humidity}`}</p>
       <img 

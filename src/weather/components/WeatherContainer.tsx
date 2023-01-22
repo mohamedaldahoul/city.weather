@@ -9,6 +9,7 @@ interface WeatherState {
   temperature?: number | any;
   humidity?: number| any;
   icon: string;
+  name: string
 }
 interface ErrorState {
   code?: number| any;
@@ -21,9 +22,10 @@ const WeatherContainer = () => {
     temperature: undefined,
     humidity: undefined,
     icon: '',
+    name: ''
   };
   const [weather, setWeather] = useState<WeatherState>(initialWeatherState);  
-  const {temperature, humidity, icon} = weather;
+  const {temperature, humidity, icon, name} = weather;
   
   const initialErrorState: ErrorState = {
     code: undefined,
@@ -36,11 +38,12 @@ const WeatherContainer = () => {
   const getWeatherInfo = (city: string) => {
     console.log('get', city);
     
-    getWeather(city).then((data)=>{ 
+    getWeather(city).then((data)=>{       
       setWeather({
         temperature: data.main.temp,
         humidity: data.main.humidity,
         icon: getIcon(data.weather[0].icon),
+        name: data.name,
       })
       setCity('')
     }).catch(({response: {data} })=>{
@@ -71,6 +74,7 @@ const WeatherContainer = () => {
           temperature={temperature}
           humidity={humidity}
           icon={icon}
+          name={name}
         />}
       { !isVisible && isError && 
         <Error 
