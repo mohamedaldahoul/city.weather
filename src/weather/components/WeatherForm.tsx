@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 type Props = {
   getWeatherInfo: (city: string) => void;

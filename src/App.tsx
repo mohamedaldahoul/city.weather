@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.png';
 import './App.css';
-import {Weather} from './components';
+import Weather from './weather';
 
 function App() {
   return (
