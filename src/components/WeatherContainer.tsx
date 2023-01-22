@@ -16,6 +16,7 @@ interface ErrorState {
 }
 
 const WeatherContainer = () => {
+  const [city, setCity] = useState('')
   const initialWeatherState: WeatherState = {
     temperature: undefined,
     humidity: undefined,
@@ -36,28 +37,35 @@ const WeatherContainer = () => {
     console.log('get', city);
     
     getWeather(city).then((data)=>{ 
-      console.log('data', data)
       setWeather({
         temperature: data.main.temp,
         humidity: data.main.humidity,
         icon: getIcon(data.weather[0].icon),
       })
-      setError(initialErrorState)
-    }).catch(({response})=>{
-      console.log('err', response)
-      const { cod, message} = response.data;
-        setError({
-          code: cod,
-          message: message
-        });
-        
+      setCity('')
+    }).catch(({response: {data} })=>{
+        const { cod, message} = data;
+          setError({
+            code: cod,
+            message: message
+          });
     }) ;
+  }
+  
+  const handleChange = (value: string) => {
+    setCity(value)
+    setWeather(initialWeatherState)
+    setError(initialErrorState) 
   }
   console.log('weather', weather, error);
   
   return (
     <>
-    <WeatherForm getWeatherInfo={getWeatherInfo}/>
+    <WeatherForm 
+      getWeatherInfo={getWeatherInfo}
+      city={city}
+      handleChange={handleChange}
+      />
     { !isError && isVisible && <WeatherInfo 
       temperature={temperature}
       humidity={humidity}
