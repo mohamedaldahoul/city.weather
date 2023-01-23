@@ -10,9 +10,9 @@ type Props = {
 const WeatherInfo = ({temperature, humidity, icon, name}: Props) => {
   return( 
     <div> 
-      <Typography>Weather Status in {name}</Typography>
-      <Typography>{`Temperature: ${temperature}`}</Typography>
-      <Typography>{`Humidity: ${humidity}`}</Typography>
+      <Typography component='p'>Weather Status in <b><em>{name}</em></b> </Typography>
+      <Typography component='p'>{`Temperature: ${temperature}`}</Typography>
+      <Typography component='p'>{`Humidity: ${humidity}`}</Typography>
       <img 
         src={icon}
         alt="icon" />

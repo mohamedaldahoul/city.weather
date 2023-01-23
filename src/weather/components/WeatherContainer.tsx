@@ -1,8 +1,19 @@
-import { useState } from "react"
+import { useState, FC } from "react"
 import { getWeather, getIcon } from "../resources";
 import WeatherForm from "./WeatherForm";
 import WeatherInfo from "./WeatherInfo";
+// import makeStyles from '@mui/styles/makeStyles';
+// import useMediaQuery from '@mui/material/useMediaQuery';
 
+// const useStyles = makeStyles(({theme})=> ({
+//   btn: {
+//     [theme.breakpoints.up('sm')]: {
+//       backgroundColor: '#007500',
+//       color: '#1a237e'
+
+//     },
+//   },
+// }));
 interface WeatherState {
   temperature?: number | any;
   humidity?: number| any;
@@ -13,9 +24,13 @@ interface ErrorState {
   code?: number| any;
   message: string;
 }
+type Props ={ 
+}
 
-const WeatherContainer = () => {
-  const [city, setCity] = useState('')
+const WeatherContainer: FC<Props> = () => {
+  const [city, setCity] = useState('');
+  const [isFetching, setIsFetching] = useState(false);
+  
   const initialWeatherState: WeatherState = {
     temperature: undefined,
     humidity: undefined,
@@ -34,7 +49,8 @@ const WeatherContainer = () => {
   const isVisible = temperature && humidity
   const isError = code !== undefined && message !== '';
   const getWeatherInfo = (city: string) => {
-    console.log('get', city);
+    setIsFetching(true); 
+    console.log(city, isFetching);
     
     getWeather(city).then((data)=>{       
       setWeather({
@@ -45,12 +61,13 @@ const WeatherContainer = () => {
       })
       setCity('')
     }).catch(({response: {data} })=>{
-        const { cod, message} = data;
-          setError({
-            code: cod,
-            message: message
-          });
-    }) ;
+      const { cod, message} = data;
+      setError({
+        code: cod,
+        message: message
+      });
+      setIsFetching(false)
+    }).finally(()=> setIsFetching(false));
   }
   
   const handleChange = (value: string) => {
@@ -58,11 +75,13 @@ const WeatherContainer = () => {
     setWeather(initialWeatherState)
     setError(initialErrorState) 
   }
-  console.log('weather', weather, error);
-  
+  const isDisabled = city === '' || isFetching;
+console.log(isDisabled, isFetching);
+
   return (
     <>
       <WeatherForm
+        isDisabled={isDisabled}
         isError={!isVisible && isError}
         error={error} 
         getWeatherInfo={getWeatherInfo}
