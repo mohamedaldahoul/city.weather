@@ -29,7 +29,7 @@ const App: FC = () => {
             width:{ xs:160 , sm: 327, md: 327, lg: 295}
           }}
           image={logo}
-          title="Anticimex"
+          title="Weather"
         />
       </Card>
       </Box>
